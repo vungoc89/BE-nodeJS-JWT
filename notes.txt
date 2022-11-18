@@ -16,4 +16,8 @@ which from package.json:
 
   Model-View-Controller
 
-  
+Router (url tren web) => /user
+
+Controller: route => controller handle
+View: render view
+Model: get data from database (write in file controller)
