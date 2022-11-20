@@ -1,6 +1,8 @@
 1.
 npm install --save-exact express@4.17.2 dotenv@10.0.0 body-parser@1.19.1 ejs@3.1.6
 
+body-parser la mot middleware
+
 2. To compile code
 npm install --save-exact @babel/core@7.15.4 @babel/node@7.15.4 @babel/preset-env@7.15.4 nodemon@2.0.15
 
@@ -21,3 +23,21 @@ Router (url tren web) => /user
 Controller: route => controller handle
 View: render view
 Model: get data from database (write in file controller)
+
+5. Create DataBase, bcrypt password
+npm install --save-exact mysql2@2.3.3
+
+npm install --save-exact bcryptjs@2.4.3
+
+6. https://www.npmjs.com/package/mysql2
+// get the promise implementation, we will use bluebird
+const bluebird = require('bluebird');
+
+npm install --save-exact bluebird@3.7.2
+
+7. https://ejs.co/#install
+<div>
+  <%= JSON.stringify(userList) %>
+</div>
+
+    https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs

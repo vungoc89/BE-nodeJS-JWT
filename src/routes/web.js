@@ -24,7 +24,12 @@ const initWebRoutes = (app) => {
     // })
 
     router.get("/user", homeController.handleUserPage);
-    
+
+    //Create = post
+    router.post("/users/create-user",homeController.handleCreateNewUser );
+
+    // Delete = post
+    router.post("/delete-user/:id", homeController.handleDeleteUser);
     // Nap router da khai bao o trong file, "/" = homepage
     return app.use("/", router);
 }
