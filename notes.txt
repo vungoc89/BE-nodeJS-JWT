@@ -22,7 +22,7 @@ Router (url tren web) => /user
 
 Controller: route => controller handle
 View: render view
-Model: get data from database (write in file controller)
+Model: get data from database (write in folder service)
 
 5. Create DataBase, bcrypt password
 npm install --save-exact mysql2@2.3.3
@@ -41,3 +41,13 @@ npm install --save-exact bluebird@3.7.2
 </div>
 
     https://stackoverflow.com/questions/56600633/displaying-arrays-in-a-list-with-ejs
+
+8. 
+npm install --save-exact sequelize@6.13.0 sequelize-cli@6.3.0
+
+9. 
+Tao file .sequelizerc 
+// https://mherman.org/blog/node-postgres-sequelize/
+
+10. https://sequelize.org/v4/manual/tutorial/migrations.html
+Run: $ node_modules/.bin/sequelize init

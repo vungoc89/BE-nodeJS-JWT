@@ -1,9 +1,10 @@
 import express from 'express';
 
-import configViewEngine from './configs/viewEngine';
+import configViewEngine from './config/viewEngine';
 import initWebRoutes from './routes/web';
 import bodyParser from 'body-parser';
 
+import connection from "./config/connect_db";
 require("dotenv").config();
 
 // https://stackoverflow.com/questions/48486561/setup-server-with-express-and-body-parser
@@ -16,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //config view engine
 configViewEngine(app); 
+
+//test connection db
+connection();
 
 //init web routes
 initWebRoutes(app);

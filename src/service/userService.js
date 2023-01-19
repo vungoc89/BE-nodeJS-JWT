@@ -9,7 +9,7 @@ import bluebird from 'bluebird';
 //     {
 //         host:'localhost', 
 //         user: 'root', 
-//         database: 'jwt_nodejs', 
+//         database: 'jwt_nodejs_01', 
 //         Promise: bluebird});
 const salt = bcrypt.genSaltSync(10);
 
@@ -26,7 +26,7 @@ const createNewUser = async(email, password, username) => {
         {
             host:'localhost', 
             user: 'root', 
-            database: 'jwt_nodejs', 
+            database: 'jwt_nodejs_01', 
             Promise: bluebird});
 
     try {
@@ -43,7 +43,7 @@ const getListUser = async() => {
     {
         host:'localhost', 
         user: 'root', 
-        database: 'jwt_nodejs', 
+        database: 'jwt_nodejs_01', 
         Promise: bluebird});
     let users = [];
 
@@ -61,7 +61,7 @@ const deleteUser = async(id) => {
         {
             host:'localhost', 
             user: 'root', 
-            database: 'jwt_nodejs', 
+            database: 'jwt_nodejs_01', 
             Promise: bluebird});
     try {    
         const [rows, fields] = await connection.execute('Delete from users where id=?', [id]);
@@ -71,9 +71,43 @@ const deleteUser = async(id) => {
         console.log(error);
     }
 }
+
+const getUserById = async(id) => {
+    const connection = await mysql.createConnection(
+        {
+            host:'localhost', 
+            user: 'root', 
+            database: 'jwt_nodejs_01', 
+            Promise: bluebird});
+    try {    
+        const [rows, fields] = await connection.execute('Select * from users where id=?', [id]);
+        // console.log('>>> check rows: ', rows);
+        return rows;
+    } catch (error) {
+        console.log(error);
+    }
+}
+const updateUserInfo = async(email, username, id) => {
+    const connection = await mysql.createConnection(
+        {
+            host:'localhost', 
+            user: 'root', 
+            database: 'jwt_nodejs_01', 
+            Promise: bluebird});
+    try {    
+        const [rows, fields] = await connection.execute('Update users set email=?, username=? where id=?', [email, username, id]);
+        console.log('>>> check rows update: ', rows);
+        return rows;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 module.exports = {
     createNewUser,
     getListUser,
     deleteUser,
-
+    getUserById, 
+    updateUserInfo,
 }
