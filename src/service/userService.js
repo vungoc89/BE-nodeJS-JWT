@@ -3,6 +3,7 @@ import mysql from 'mysql2/promise';
 import bcrypt from 'bcryptjs';
 import bluebird from 'bluebird';
 
+import db from '../models/models/index';
 
 // create the connection, specify bluebird as Promise
 // const connection = await mysql.createConnection(
@@ -20,17 +21,15 @@ const hashUserPassword = (userPassword) => {
 }
 
 // https://www.npmjs.com/package/mysql2
+// https://sequelize.org/docs/v6/core-concepts/model-querying-basics/
 const createNewUser = async(email, password, username) => {
     let hashPass = hashUserPassword(password);
-    const connection = await mysql.createConnection(
-        {
-            host:'localhost', 
-            user: 'root', 
-            database: 'jwt_nodejs_01', 
-            Promise: bluebird});
-
     try {
-        const [rows, fields] = await connection.execute('INSERT INTO users (email, password, username) VALUES (?, ?, ?)', [email, hashPass, username]);
+        await db.User.create({
+            username: username,
+            email:email,
+            password:hashPass
+        })
     } catch (error) {
         console.log(error);
     }
@@ -39,68 +38,30 @@ const createNewUser = async(email, password, username) => {
 }
 
 const getListUser = async() => {
-    const connection = await mysql.createConnection(
-    {
-        host:'localhost', 
-        user: 'root', 
-        database: 'jwt_nodejs_01', 
-        Promise: bluebird});
     let users = [];
-
-    try {    
-        const [rows, fields] = await connection.execute('SELECT * FROM users');
-        console.log('>>> check rows: ', rows);
-        return rows;
-    } catch (error) {
-        console.log(error);
-    }
+    users = await db.User.findAll();
+    return users;
 }
 
-const deleteUser = async(id) => {
-    const connection = await mysql.createConnection(
-        {
-            host:'localhost', 
-            user: 'root', 
-            database: 'jwt_nodejs_01', 
-            Promise: bluebird});
-    try {    
-        const [rows, fields] = await connection.execute('Delete from users where id=?', [id]);
-        // console.log('>>> check rows: ', rows);
-        return rows;
-    } catch (error) {
-        console.log(error);
-    }
+const deleteUser = async(userId) => {
+    await db.User.destroy({
+        where: {id: userId}
+    })
 }
 
-const getUserById = async(id) => {
-    const connection = await mysql.createConnection(
-        {
-            host:'localhost', 
-            user: 'root', 
-            database: 'jwt_nodejs_01', 
-            Promise: bluebird});
-    try {    
-        const [rows, fields] = await connection.execute('Select * from users where id=?', [id]);
-        // console.log('>>> check rows: ', rows);
-        return rows;
-    } catch (error) {
-        console.log(error);
-    }
+const getUserById = async(userId) => {
+    let user = {};
+    user = await db.User.findOne({
+        where: {id: userId}
+    })
+    return user.get({plain: true}); //convert sequelize object => javascript object
+    // console.log(">>> check user findOne: ", user, "id = ", userId);
 }
 const updateUserInfo = async(email, username, id) => {
-    const connection = await mysql.createConnection(
-        {
-            host:'localhost', 
-            user: 'root', 
-            database: 'jwt_nodejs_01', 
-            Promise: bluebird});
-    try {    
-        const [rows, fields] = await connection.execute('Update users set email=?, username=? where id=?', [email, username, id]);
-        console.log('>>> check rows update: ', rows);
-        return rows;
-    } catch (error) {
-        console.log(error);
-    }
+    await db.User.update(
+        {email:email, username:username},
+        {where: {id: id}}
+    );
 }
 
 

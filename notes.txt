@@ -51,3 +51,10 @@ Tao file .sequelizerc
 
 10. https://sequelize.org/v4/manual/tutorial/migrations.html
 Run: $ node_modules/.bin/sequelize init
+
+11. file config.json
+"define":{
+  "freezeTableName":true 
+} => để đặt tên table ko cần số nhiều (bỏ s: Users => User)
+
+"logging":true => để ko in ra câu query trong terminal

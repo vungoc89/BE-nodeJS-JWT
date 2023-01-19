@@ -17,4 +17,4 @@ const sequelize = new Sequelize('jwt_nodejs_01', 'root', null, {
   
 }
 
-export default connection;
+export default connection; //call in file server.js
