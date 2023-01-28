@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class ProjectUser extends Model {
+  class Project_User extends Model {
     /**
      * MODEL này dùng để define a table trong migrations
      * Helper method for defining associations.
@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  ProjectUser.init({
+  Project_User.init({
     projectId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'ProjectUser',
+    modelName: 'Project_User',
   });
-  return ProjectUser;
+  return Project_User;
 };

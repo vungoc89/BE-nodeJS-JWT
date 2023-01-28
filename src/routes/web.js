@@ -2,7 +2,7 @@ import express from 'express';
 
 // import { handleHelloWorld } from '../controller/homeController';
 import homeController from '../controller/homeController';
-
+// import apiController from '../controller/apiController';
 // ----------------------------------------------
 const router = express.Router();
 
@@ -37,6 +37,8 @@ const initWebRoutes = (app) => {
     // Update B2: complete update = post (on update page(update button))
     router.post("/users/update-user", homeController.handleUpdateUser);
 
+
+    // router.get("/api/test-api", apiController.testApi);
 
     // Nap router da khai bao o trong file, "/" = homepage
     return app.use("/", router);

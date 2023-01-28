@@ -4,7 +4,8 @@
     "password": null,
     "database": "jwt_nodejs_01",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "define":{"freezeTableName":true}
   },
   "test": {
     "username": "root",
